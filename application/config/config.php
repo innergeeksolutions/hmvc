@@ -521,3 +521,14 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+//if PATH_INFO contains admin, then point the modules directory to the backend module
+if(isset($_SERVER['PATH_INFO']) && strpos($_SERVER['PATH_INFO'], '/admin') !== false):
+  $config['modules_locations'] = array(
+    APPPATH.'modules/backend/' => '../modules/backend/',//your backend module directory
+  );
+else:
+  $config['modules_locations'] = array(
+    APPPATH.'modules/frontend/' => '../modules/frontend/',//your frontend module directory
+  );
+endif;
